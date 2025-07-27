@@ -51,6 +51,6 @@ int main()
     c->right = g;
     c->left = f;
 
-    cout << "Inorder Traversal: ";
+    cout << "Preorder Traversal: ";
     printPreorder(a);
 }
