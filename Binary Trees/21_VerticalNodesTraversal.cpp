@@ -28,7 +28,7 @@ public:
         queue<pair<TreeNode *, pair<int, int>>> q;
         if (root == NULL)
             return ans;
-        q.push({root, {0, 0}}); //{horizontal {dist, levels}}
+        q.push({root, {0, 0}}); //{node, {horizontal_dist, levels}}
         while (!q.empty())
         {
             auto f = q.front();
