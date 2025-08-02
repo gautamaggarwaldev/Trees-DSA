@@ -49,16 +49,6 @@ public:
         }
 
         sort(merged.begin(), merged.end());
-
-        for (int i = 0; i < n; ++i) 
-        {
-            in1[i] = merged[i]; // Copy back to in1 because we are merging in-place
-        }
-
-        for (int j = 0; j < m; ++j)
-        {
-            in2[j] = merged[n + j]; // Copy back to in2 because we are merging in-place
-        }
         return merged;
     }
 
