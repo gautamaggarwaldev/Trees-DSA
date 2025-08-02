@@ -18,29 +18,47 @@ public:
 class Solution
 {
 public:
-    void preorder(Node *root, vector<int> &pre)
-    {
-        if (root == NULL)
-            return;
-        pre.push_back(root->data);
-        preorder(root->left, pre);
-        preorder(root->right, pre);
-    }
     vector<Node *> findPreSuc(Node *root, int key)
     {
-        vector<int> pre;
-        preorder(root, pre);
-        int idx;
-        for (int i = 0; i < pre.size(); i++)
-        {
-            if (pre[i] == key)
+        Node *temp = root;
+        Node *pre = NULL;
+        Node *suc = NULL;
+        // Search for key, remembering potential predecessors and successors
+        while (temp)
+        { // Add check for NULL
+            if (temp->data == key)
+                break; 
+            else if (temp->data > key) // key is smaller move left
             {
-                idx = i;
+                suc = temp;
+                temp = temp->left;
+            }
+            else // key is larger move right
+            {
+                pre = temp;
+                temp = temp->right;
             }
         }
-        Node *pree = new Node(pre[idx - 1]);
-        Node *succ = new Node(pre[idx + 1]);
-        return {pree, succ};
+        if (!temp)
+        {
+            // Key not found; return last valid pre, suc.
+            return {pre, suc};
+        }
+        // Get max from left subtree
+        Node *leftTree = temp->left; //
+        while (leftTree)
+        {
+            pre = leftTree;
+            leftTree = leftTree->right; // Traverse to the rightmost node in left subtree
+        }
+        // Get min from right subtree
+        Node *rightTree = temp->right;
+        while (rightTree)
+        {
+            suc = rightTree;
+            rightTree = rightTree->left; // Traverse to the leftmost node in right subtree
+        }
+        return {pre, suc};
     }
 };
 int main()
